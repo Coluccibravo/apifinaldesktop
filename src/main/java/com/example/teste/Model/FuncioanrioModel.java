@@ -10,10 +10,30 @@ public class FuncioanrioModel {
     private Long id;
 
     @Column
-    String nome;
+    private String nome;
 
     @Column
-    String cpf;
+    private String cpf;
+
+    @Column
+    private String username;
+
+    @Column
+    private String dataNascimento1;
+
+    @Column
+    private String cargo;
+
+    @Column
+    private String email;
+
+    public String getDataNascimento1() {
+        return dataNascimento1;
+    }
+
+    public void setDataNascimento1(String dataNascimento1) {
+        this.dataNascimento1 = dataNascimento1;
+    }
 
     public Long getId() {
         return id;
@@ -39,4 +59,27 @@ public class FuncioanrioModel {
         this.cpf = cpf;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getCargo() {
+        return cargo;
+    }
+
+    public void setCargo(String cargo) {
+        this.cargo = cargo;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }

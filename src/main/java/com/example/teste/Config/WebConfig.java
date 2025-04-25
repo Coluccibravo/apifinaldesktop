@@ -10,7 +10,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("http://localhost:3000", "http://localhost:3001", "http://127.0.0.1:5500", "https://web-bankalt.vercel.app") // Front-ends permitidos
+                .allowedOrigins("http://localhost:3000", "http://localhost:3001","http://localhost:5173" , "http://127.0.0.1:5500", "https://web-bankalt.vercel.app") // Front-ends permitidos
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                 .allowedHeaders("*")
                 .allowCredentials(true);
