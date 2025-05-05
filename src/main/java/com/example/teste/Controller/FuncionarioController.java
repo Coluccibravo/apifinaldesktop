@@ -3,9 +3,12 @@ package com.example.teste.Controller;
 import com.example.teste.Model.FuncioanrioModel;
 import com.example.teste.Repository.FuncionarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("apiFuncionario")
@@ -23,5 +26,11 @@ public class FuncionarioController {
     @GetMapping("/todos")
     public List<FuncioanrioModel> buscaTodos(){
         return fRepo.findAll();
+    }
+
+    @GetMapping("/login/{username}/{senha}")
+    public Optional<FuncioanrioModel> buscarPorNomeESenha(@PathVariable String username, @PathVariable String senha)
+    {
+        return fRepo.findByUsernameAndSenha(username,senha);
     }
 }
