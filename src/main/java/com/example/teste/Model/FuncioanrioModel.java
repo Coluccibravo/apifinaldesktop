@@ -19,7 +19,7 @@ public class FuncioanrioModel {
     private String username;
 
     @Column
-    private String dataNascimento1;
+    private String datanascimento1;
 
     @Column
     private String senha;
@@ -31,11 +31,11 @@ public class FuncioanrioModel {
     private String email;
 
     public String getDataNascimento1() {
-        return dataNascimento1;
+        return datanascimento1;
     }
 
     public void setDataNascimento1(String dataNascimento1) {
-        this.dataNascimento1 = dataNascimento1;
+        this.datanascimento1 = dataNascimento1;
     }
 
     public Long getId() {
