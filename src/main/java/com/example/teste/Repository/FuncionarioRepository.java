@@ -4,9 +4,10 @@ import com.example.teste.Controller.FuncionarioController;
 import com.example.teste.Model.FuncioanrioModel;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
-
+@Repository
 public interface FuncionarioRepository extends JpaRepository<FuncioanrioModel, Long> {
     Optional<FuncioanrioModel> findByUsernameAndSenha(String username, String senha);
     Optional<FuncioanrioModel> findByUsername(String username);
