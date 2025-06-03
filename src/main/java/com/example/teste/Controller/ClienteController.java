@@ -4,6 +4,7 @@ import com.example.teste.Model.ClienteModel;
 import com.example.teste.Model.FuncioanrioModel;
 import com.example.teste.Repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,4 +42,13 @@ public class ClienteController {
         return fRepo.findByNomeAndCpf(nome, cpf);
     }
 
+    @GetMapping("/buscarcpf/{cpf}")
+    public Optional<ClienteModel> findbyCpf(@PathVariable String cpf){
+        return fRepo.findByCpf(cpf);
+    }
+
+    @PutMapping("/atualizar")
+    public void atualizar(@RequestBody ClienteModel cliente) {
+        fRepo.save(cliente);
+    }
 }
