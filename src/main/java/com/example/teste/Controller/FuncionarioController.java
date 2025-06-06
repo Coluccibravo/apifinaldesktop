@@ -70,4 +70,5 @@ public class FuncionarioController {
     public void atualizar(@RequestBody FuncioanrioModel funcionario) {
         fRepo.save(funcionario);
     }
+
 }

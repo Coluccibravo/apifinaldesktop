@@ -2,6 +2,9 @@ package com.example.teste.Model;
 
 import jakarta.persistence.*;
 
+import java.sql.Date;
+import java.time.LocalDate;
+
 @Entity
 @Table(name = "funcionario")
 public class FuncioanrioModel {
@@ -19,7 +22,7 @@ public class FuncioanrioModel {
     private String username;
 
     @Column
-    private String datanascimento1;
+    private LocalDate datanascimento1;
 
     @Column
     private String senha;
@@ -30,11 +33,11 @@ public class FuncioanrioModel {
     @Column
     private String email;
 
-    public String getDataNascimento1() {
+    public LocalDate getDataNascimento1() {
         return datanascimento1;
     }
 
-    public void setDataNascimento1(String dataNascimento1) {
+    public void setDataNascimento1(LocalDate dataNascimento1) {
         this.datanascimento1 = dataNascimento1;
     }
 
