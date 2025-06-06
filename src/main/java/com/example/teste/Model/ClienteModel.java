@@ -1,6 +1,8 @@
 package com.example.teste.Model;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -17,6 +19,15 @@ public class ClienteModel {
     private String sexo;
 
     @Column
+    private String telefone;
+
+    @Column 
+    private String celular;
+
+    @Column
+    private String email;
+
+    @Column
     private String estadoCivil;
 
     @Column
@@ -31,13 +42,21 @@ public class ClienteModel {
     @Column
     private String senha;
 
+    
+    @OneToOne(mappedBy = "cliente", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private EnderecoModel endereco;
+
     public ClienteModel() {
     }
 
-    public ClienteModel(Long id, String nome, String sexo, String estadoCivil, String datanascimento1, String cpf, String rg, String senha) {
+    public ClienteModel(Long id, String nome, String sexo, String telefone, String celular, String email, String estadoCivil, String datanascimento1, String cpf, String rg, String senha) {
         this.id = id;
         this.nome = nome;
         this.sexo = sexo;
+        this.telefone = telefone;
+        this.celular = celular;
+        this.email = email;
         this.estadoCivil = estadoCivil;
         this.datanascimento1 = datanascimento1;
         this.cpf = cpf;
@@ -107,5 +126,36 @@ public class ClienteModel {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public void getCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public void setEndereco(EnderecoModel endereco2) {
+    }
+
+    public String getCelular() {
+        return celular;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getTelefone(){
+        return telefone;
+    }
+
+    public void setCelular(String celular) {
+        this.celular = celular;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
     }
 }
