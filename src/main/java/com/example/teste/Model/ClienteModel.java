@@ -47,6 +47,10 @@ public class ClienteModel {
     @JsonManagedReference
     private EnderecoModel endereco;
 
+    @OneToOne(mappedBy = "cliente", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private RendaInvestimentoModel rendaInvestimento;   
+
     public ClienteModel() {
     }
 

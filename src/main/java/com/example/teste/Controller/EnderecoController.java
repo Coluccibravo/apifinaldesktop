@@ -52,4 +52,20 @@ public class EnderecoController {
 
         return ResponseEntity.ok(enderecoOpt.get());
     }
+
+    @PutMapping
+    public ResponseEntity<EnderecoModel> atualizarEndereco(@RequestBody EnderecoModel endereco) {
+    if (endereco.getCliente() == null || endereco.getCliente().getId() == null) {
+        return ResponseEntity.badRequest().build();
+    }
+
+    Optional<EnderecoModel> existente = enderecoRepository.findByClienteId(endereco.getCliente().getId());
+    if (existente.isEmpty()) {
+        return ResponseEntity.notFound().build();
+    }
+
+    endereco.setId(existente.get().getId()); // manter o mesmo ID do endereço existente
+    EnderecoModel atualizado = enderecoRepository.save(endereco);
+    return ResponseEntity.ok(atualizado);
+}
 }

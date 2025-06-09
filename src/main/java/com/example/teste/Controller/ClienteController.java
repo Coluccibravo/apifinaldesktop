@@ -53,4 +53,19 @@ public class ClienteController {
         return fRepo.findByCpf(cpf);
     }
 
+    @PutMapping
+public ResponseEntity<ClienteModel> atualizarCliente(@RequestBody ClienteModel cliente) {
+    if (cliente.getId() == null) {
+        return ResponseEntity.badRequest().build();
+    }
+
+    Optional<ClienteModel> existente = fRepo.findById(cliente.getId());
+    if (existente.isEmpty()) {
+        return ResponseEntity.notFound().build();
+    }
+
+    ClienteModel atualizado = fRepo.save(cliente);
+    return ResponseEntity.ok(atualizado);
+}
+
 }
