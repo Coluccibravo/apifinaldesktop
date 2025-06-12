@@ -40,6 +40,27 @@ public class RendaInvestimentoModel {
     @Column
     private float persentualRendaInvestimentos;
 
+    @Column
+    private String plano;
+
+    @Column
+    private String agencia;
+
+    @Column
+    private String tipo;
+
+    @Column
+    private int fundoimobiliario;
+
+    @Column 
+    private int acoes;
+
+    @Column
+    private int Criptomoedas;
+
+    @Column
+    private int poupanca;
+
 
     @OneToOne
     @JoinColumn(name = "cliente_id")
@@ -127,4 +148,48 @@ public class RendaInvestimentoModel {
     public void setPerfildoinvestidor(String perfildoinvestidor) {
         this.perfildoinvestidor = perfildoinvestidor;
     }
+
+    public String getPlano() {
+        return plano;
+    }   
+public void setPlano(String plano) {
+        this.plano = plano;
+    }
+    public String getAgencia() {
+        return agencia;
+    }
+public void setAgencia(String agencia) {
+        this.agencia = agencia;
+    }
+    public String getTipo() {
+        return tipo;
+    }
+public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+    public int getFundoimobiliario() {
+        return fundoimobiliario;
+    }
+public void setFundoimobiliario(int fundoimobiliario) {
+        this.fundoimobiliario = fundoimobiliario;
+    }
+    public int getAcoes() {
+        return acoes;
+    }
+public void setAcoes(int acoes) {
+        this.acoes = acoes;
+    }
+    public int getCriptomoedas() {
+        return Criptomoedas;
+    }
+public void setCriptomoedas(int criptomoedas) {
+        Criptomoedas = criptomoedas;
+    }
+    public int getPoupanca() {
+        return poupanca;
+    }
+public void setPoupanca(int poupanca) {
+        this.poupanca = poupanca;
+    }
+    
 }

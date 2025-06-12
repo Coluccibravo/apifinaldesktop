@@ -45,6 +45,30 @@ public class ClienteModel {
     @Column
     private String modo;
 
+    @Column
+    private String cor;
+
+    @Column
+    private String categoriaIniciada;
+
+    @Column
+    private String categoriaFinalizada;
+
+    @Column
+    private String meta;
+
+    @Column
+    private String nivelSuporte;
+
+    @Column
+    private String corPrimaria;
+
+    @Column
+    private String corSecundaria;
+
+    @Column
+    private String corTerciaria;
+
     @OneToOne(mappedBy = "cliente", cascade = CascadeType.ALL)
     @JsonManagedReference
     private CartaoModel cartaoModel;
@@ -168,4 +192,77 @@ public class ClienteModel {
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
+
+    public String getModo() {
+        return modo;
+    }
+
+    public void setModo(String modo) {
+        this.modo = modo;
+    }
+
+    public String getCor() {
+        return cor;
+    }
+
+    public void setCor(String cor) {
+        this.cor = cor;
+    }
+
+    public String getCategoriaIniciada() {
+        return categoriaIniciada;
+    }
+
+    public void setCategoriaIniciada(String categoriaIniciada) {
+        this.categoriaIniciada = categoriaIniciada;
+    }
+
+    public String getCategoriaFinalizada() {
+        return categoriaFinalizada;
+    }
+
+    public void setCategoriaFinalizada(String categoriaFinalizada) {
+        this.categoriaFinalizada = categoriaFinalizada;
+    }
+
+    public String getMeta() {
+        return meta;
+    }
+
+    public void setMeta(String meta) {
+        this.meta = meta;
+    }
+
+    public String getNivelSuporte() {
+        return nivelSuporte;
+    }
+
+    public void setNivelSuporte(String nivelSuporte) {
+        this.nivelSuporte = nivelSuporte;
+    }
+
+    public String getCorPrimaria() {
+        return corPrimaria;
+    }
+
+    public void setCorPrimaria(String corPrimaria) {
+        this.corPrimaria = corPrimaria;
+    }
+
+    public String getCorSecundaria() {
+        return corSecundaria;
+    }
+
+    public void setCorSecundaria(String corSecundaria) {
+        this.corSecundaria = corSecundaria;
+    }
+
+    public String getCorTerciaria() {
+        return corTerciaria;
+    }
+
+    public void setCorTerciaria(String corTerciaria) {
+        this.corTerciaria = corTerciaria;
+    }
+
 }
