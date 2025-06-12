@@ -30,7 +30,13 @@ public class RendaInvestimentoModel {
 
     @Column
     private float rendaTotalInvestimentos;
-    
+
+    @Column
+    private Float saldo;
+
+    @Column
+    private String perfildoinvestidor;
+
     @Column
     private float persentualRendaInvestimentos;
 
@@ -106,5 +112,19 @@ public class RendaInvestimentoModel {
         this.cliente = cliente; 
     }
 
+    public Float getSaldo() {
+        return saldo;
+    }
 
+    public void setSaldo(float saldo) {
+        this.saldo = saldo;
+    }
+
+    public String getPerfildoinvestidor() {
+        return perfildoinvestidor;
+    }
+
+    public void setPerfildoinvestidor(String perfildoinvestidor) {
+        this.perfildoinvestidor = perfildoinvestidor;
+    }
 }

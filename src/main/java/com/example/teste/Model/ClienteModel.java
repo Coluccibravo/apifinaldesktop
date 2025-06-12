@@ -42,6 +42,12 @@ public class ClienteModel {
     @Column
     private String senha;
 
+    @Column
+    private String modo;
+
+    @OneToOne(mappedBy = "cliente", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private CartaoModel cartaoModel;
     
     @OneToOne(mappedBy = "cliente", cascade = CascadeType.ALL)
     @JsonManagedReference
@@ -49,7 +55,7 @@ public class ClienteModel {
 
     @OneToOne(mappedBy = "cliente", cascade = CascadeType.ALL)
     @JsonManagedReference
-    private RendaInvestimentoModel rendaInvestimento;   
+    private RendaInvestimentoModel rendaInvestimento;
 
     public ClienteModel() {
     }
