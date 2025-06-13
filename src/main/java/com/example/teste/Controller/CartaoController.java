@@ -31,12 +31,13 @@ public class CartaoController {
     }
 
     @GetMapping("/buscarPorClienteId/{clienteId}")
-     public ResponseEntity<?> buscarEnderecoPorClienteId(@PathVariable Long clienteId) {
-        Optional<CartaoModel> enderecoOpt = crepo.findByClienteId(clienteId);
-        if (enderecoOpt.isEmpty()) {
-            return ResponseEntity.status(404).body("Endereço não encontrado para o cliente id: " + clienteId);
+    public ResponseEntity<?> buscarCartoesPorClienteId(@PathVariable Long clienteId) {
+        List<Optional<CartaoModel>> cartoes = crepo.findByClienteId(clienteId);
+
+        if (cartoes == null || cartoes.isEmpty()) {
+            return ResponseEntity.status(404).body("Nenhum cartão encontrado para o cliente com id: " + clienteId);
         }
 
-        return ResponseEntity.ok(enderecoOpt.get());
+        return ResponseEntity.ok(cartoes);
     }
 }

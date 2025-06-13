@@ -25,10 +25,7 @@ public class CartaoModel {
     private String nome;
 
     @Column
-    private int debito;
-
-    @Column
-    private int credito;
+    private String tipo;
 
     @OneToOne
     @JoinColumn(name = "cliente_id")
@@ -75,24 +72,16 @@ public class CartaoModel {
         this.nome = nome;
     }
 
-    public int getDebito() {
-        return debito;
-    }
-
-    public void setDebito(int debito) {
-        this.debito = debito;
-    }
-
-    public int getCredito() {
-        return credito;
-    }
-
-    public void setCredito(int credito) {
-        this.credito = credito;
-    }
-
     public ClienteModel getCliente() {
         return cliente;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
     public void setCliente(ClienteModel cliente) {
@@ -105,8 +94,6 @@ public class CartaoModel {
         this.cvv = cvv;
         this.datavalidade = datavalidade;
         this.nome = nome;
-        this.debito = debito;
-        this.credito = credito;
         this.cliente = cliente;
     }
 
