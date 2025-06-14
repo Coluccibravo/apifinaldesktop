@@ -1,6 +1,6 @@
 package com.example.teste.Model;
 
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.*;
@@ -23,7 +23,7 @@ public class ClienteModel {
     @Column
     private String telefone;
 
-    @Column 
+    @Column
     private String celular;
 
     @Column
@@ -48,7 +48,7 @@ public class ClienteModel {
     private String modo;
 
     @Column
-    private String cor;
+    private String comorbidade;
 
     @Column
     private String categoriaIniciada;
@@ -74,7 +74,15 @@ public class ClienteModel {
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<CartaoModel> cartaoModel;
-    
+
+    @OneToMany(mappedBy = "clienteEnvio")
+    @JsonIgnore
+    private List<ExtratoModel> extratoModelEnvio;
+
+    @OneToMany(mappedBy = "clienteRecebido")
+    @JsonIgnore
+    private List<ExtratoModel> extratoModelRecebido;
+
     @OneToOne(mappedBy = "cliente", cascade = CascadeType.ALL)
     @JsonManagedReference
     private EnderecoModel endereco;
@@ -86,7 +94,8 @@ public class ClienteModel {
     public ClienteModel() {
     }
 
-    public ClienteModel(Long id, String nome, String sexo, String telefone, String celular, String email, String estadoCivil, String datanascimento1, String cpf, String rg, String senha) {
+    public ClienteModel(Long id, String nome, String sexo, String telefone, String celular, String email,
+            String estadoCivil, String datanascimento1, String cpf, String rg, String senha) {
         this.id = id;
         this.nome = nome;
         this.sexo = sexo;
@@ -179,7 +188,7 @@ public class ClienteModel {
         return email;
     }
 
-    public String getTelefone(){
+    public String getTelefone() {
         return telefone;
     }
 
@@ -203,12 +212,12 @@ public class ClienteModel {
         this.modo = modo;
     }
 
-    public String getCor() {
-        return cor;
+    public String getComorbidade() {
+        return comorbidade;
     }
 
-    public void setCor(String cor) {
-        this.cor = cor;
+    public void setComorbidade(String comorbidade) {
+        this.comorbidade = comorbidade;
     }
 
     public String getCategoriaIniciada() {
