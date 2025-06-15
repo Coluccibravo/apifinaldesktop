@@ -75,6 +75,10 @@ public class ClienteModel {
     @JsonManagedReference
     private List<CartaoModel> cartaoModel;
 
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private List<PixModel> pix;
+
     @OneToMany(mappedBy = "clienteEnvio")
     @JsonIgnore
     private List<ExtratoModel> extratoModelEnvio;
