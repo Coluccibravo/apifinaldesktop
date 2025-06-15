@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -42,19 +43,31 @@ public class RendaController {
         return ResponseEntity.ok(enderecoOpt.get());
     }
 
-    @PutMapping
+   @PatchMapping
 public ResponseEntity<RendaInvestimentoModel> atualizarRenda(@RequestBody RendaInvestimentoModel renda) {
     if (renda.getCliente() == null || renda.getCliente().getId() == null) {
         return ResponseEntity.badRequest().build();
     }
 
-    Optional<RendaInvestimentoModel> existente = repository.findByClienteId(renda.getCliente().getId());
-    if (existente.isEmpty()) {
+    Optional<RendaInvestimentoModel> existenteOpt = repository.findByClienteId(renda.getCliente().getId());
+    if (existenteOpt.isEmpty()) {
         return ResponseEntity.notFound().build();
     }
 
-    renda.setId(existente.get().getId()); // manter o mesmo ID da renda existente
-    RendaInvestimentoModel atualizado = repository.save(renda);
+    RendaInvestimentoModel existente = existenteOpt.get();
+
+    // Atualiza apenas os campos que vieram preenchidos
+    if (renda.getRendaMensal() != null) {
+        existente.setRendaMensal(renda.getRendaMensal());
+    }
+    if (renda.getPessoasDependentes() != null) {
+        existente.setPessoasDependentes(renda.getPessoasDependentes());
+    }
+    if (renda.getRendaTotalresidencial() != null) {
+        existente.setRendaTotalresidencial(renda.getRendaTotalresidencial());
+    }
+
+    RendaInvestimentoModel atualizado = repository.save(existente);
     return ResponseEntity.ok(atualizado);
 }
 }

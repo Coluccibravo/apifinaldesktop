@@ -1,35 +1,27 @@
 package com.example.teste.Model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "renda_investimento")
 public class RendaInvestimentoModel {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column 
-    private float rendaMensal;
+    private Float rendaMensal;
 
     @Column
-    private int PessoasDependentes;
+    private Integer PessoasDependentes;
 
     @Column
-    private float rendaTotalresidencial;
+    private Float rendaTotalresidencial;
 
     @Column
-    private float rendaTotalInvestimentos;
+    private Float rendaTotalInvestimentos;
 
     @Column
     private Float saldo;
@@ -38,7 +30,7 @@ public class RendaInvestimentoModel {
     private String perfildoinvestidor;
 
     @Column
-    private float persentualRendaInvestimentos;
+    private Float persentualRendaInvestimentos;
 
     @Column
     private String plano;
@@ -50,17 +42,16 @@ public class RendaInvestimentoModel {
     private String tipo;
 
     @Column
-    private int fundoimobiliario;
+    private Integer fundoimobiliario;
 
     @Column 
-    private int acoes;
+    private Integer acoes;
 
     @Column
-    private int Criptomoedas;
+    private Integer Criptomoedas;
 
     @Column
-    private int poupanca;
-
+    private Integer poupanca;
 
     @OneToOne
     @JoinColumn(name = "cliente_id")
@@ -70,74 +61,75 @@ public class RendaInvestimentoModel {
     public RendaInvestimentoModel() {
     }
 
-    public RendaInvestimentoModel(float rendaMensal, int pessoasDependentes, float rendaTotalresidencial, float rendaTotalInvestimentos, float persentualRendaInvestimentos) {
+    public RendaInvestimentoModel(Float rendaMensal, Integer pessoasDependentes, Float rendaTotalresidencial, Float rendaTotalInvestimentos, Float persentualRendaInvestimentos) {
         this.rendaMensal = rendaMensal;
         this.PessoasDependentes = pessoasDependentes;
         this.rendaTotalresidencial = rendaTotalresidencial;
         this.rendaTotalInvestimentos = rendaTotalInvestimentos;
         this.persentualRendaInvestimentos = persentualRendaInvestimentos;
     }
+
     public Long getId() {
         return id;
-    }
-
-    public float getRendaMensal() {
-        return rendaMensal;
-    }
-
-    public int getPessoasDependentes() {
-        return PessoasDependentes;
-    }
-
-    public float getRendaTotalresidencial() {
-        return rendaTotalresidencial;
-    }
-
-    public float getRendaTotalInvestimentos() {
-        return rendaTotalInvestimentos;
-    }
-
-    public float getPersentualRendaInvestimentos() {
-        return persentualRendaInvestimentos;
-    }
-
-    public ClienteModel getCliente() {
-        return cliente;
     }
 
     public void setId(Long id) {
         this.id = id;
     }
 
-    public void setRendaMensal(float rendaMensal) {
+    public Float getRendaMensal() {
+        return rendaMensal;
+    }
+
+    public void setRendaMensal(Float rendaMensal) {
         this.rendaMensal = rendaMensal;
     }
 
-    public void setPessoasDependentes(int pessoasDependentes) {
+    public Integer getPessoasDependentes() {
+        return PessoasDependentes;
+    }
+
+    public void setPessoasDependentes(Integer pessoasDependentes) {
         PessoasDependentes = pessoasDependentes;
     }
 
-    public void setRendaTotalresidencial(float rendaTotalresidencial) {
+    public Float getRendaTotalresidencial() {
+        return rendaTotalresidencial;
+    }
+
+    public void setRendaTotalresidencial(Float rendaTotalresidencial) {
         this.rendaTotalresidencial = rendaTotalresidencial;
     }
 
-    public void setRendaTotalInvestimentos(float rendaTotalInvestimentos) {
+    public Float getRendaTotalInvestimentos() {
+        return rendaTotalInvestimentos;
+    }
+
+    public void setRendaTotalInvestimentos(Float rendaTotalInvestimentos) {
         this.rendaTotalInvestimentos = rendaTotalInvestimentos;
     }
 
-    public void setPersentualRendaInvestimentos(float persentualRendaInvestimentos) {
+    public Float getPersentualRendaInvestimentos() {
+        return persentualRendaInvestimentos;
+    }
+
+    public void setPersentualRendaInvestimentos(Float persentualRendaInvestimentos) {
         this.persentualRendaInvestimentos = persentualRendaInvestimentos;
     }
 
+    public ClienteModel getCliente() {
+        return cliente;
+    }
+
     public void setCliente(ClienteModel cliente) {
-        this.cliente = cliente; 
+        this.cliente = cliente;
     }
 
     public Float getSaldo() {
         return saldo;
     }
 
-    public void setSaldo(float saldo) {
+    public void setSaldo(Float saldo) {
         this.saldo = saldo;
     }
 
@@ -151,45 +143,57 @@ public class RendaInvestimentoModel {
 
     public String getPlano() {
         return plano;
-    }   
-public void setPlano(String plano) {
+    }
+
+    public void setPlano(String plano) {
         this.plano = plano;
     }
+
     public String getAgencia() {
         return agencia;
     }
-public void setAgencia(String agencia) {
+
+    public void setAgencia(String agencia) {
         this.agencia = agencia;
     }
+
     public String getTipo() {
         return tipo;
     }
-public void setTipo(String tipo) {
+
+    public void setTipo(String tipo) {
         this.tipo = tipo;
     }
-    public int getFundoimobiliario() {
+
+    public Integer getFundoimobiliario() {
         return fundoimobiliario;
     }
-public void setFundoimobiliario(int fundoimobiliario) {
+
+    public void setFundoimobiliario(Integer fundoimobiliario) {
         this.fundoimobiliario = fundoimobiliario;
     }
-    public int getAcoes() {
+
+    public Integer getAcoes() {
         return acoes;
     }
-public void setAcoes(int acoes) {
+
+    public void setAcoes(Integer acoes) {
         this.acoes = acoes;
     }
-    public int getCriptomoedas() {
+
+    public Integer getCriptomoedas() {
         return Criptomoedas;
     }
-public void setCriptomoedas(int criptomoedas) {
+
+    public void setCriptomoedas(Integer criptomoedas) {
         Criptomoedas = criptomoedas;
     }
-    public int getPoupanca() {
+
+    public Integer getPoupanca() {
         return poupanca;
     }
-public void setPoupanca(int poupanca) {
+
+    public void setPoupanca(Integer poupanca) {
         this.poupanca = poupanca;
     }
-    
 }

@@ -53,19 +53,32 @@ public class ClienteController {
         return fRepo.findByCpf(cpf);
     }
 
-    @PutMapping
+    @PatchMapping
 public ResponseEntity<ClienteModel> atualizarCliente(@RequestBody ClienteModel cliente) {
     if (cliente.getId() == null) {
         return ResponseEntity.badRequest().build();
     }
 
-    Optional<ClienteModel> existente = fRepo.findById(cliente.getId());
-    if (existente.isEmpty()) {
+    Optional<ClienteModel> existenteOpt = fRepo.findById(cliente.getId());
+    if (existenteOpt.isEmpty()) {
         return ResponseEntity.notFound().build();
     }
 
-    ClienteModel atualizado = fRepo.save(cliente);
+    ClienteModel existente = existenteOpt.get();
+
+    // Apenas atualiza campos que vieram no JSON (evita sobrescrever com null)
+    if (cliente.getNome() != null) existente.setNome(cliente.getNome());
+    if (cliente.getCpf() != null) existente.setCpf(cliente.getCpf());
+    if (cliente.getRg() != null) existente.setRg(cliente.getRg());
+    if (cliente.getEstadoCivil() != null) existente.setEstadoCivil(cliente.getEstadoCivil());
+    if (cliente.getDatanascimento1() != null) existente.setDatanascimento1(cliente.getDatanascimento1());
+    if (cliente.getSexo() != null) existente.setSexo(cliente.getSexo());
+    if (cliente.getEmail() != null) existente.setEmail(cliente.getEmail());
+    if (cliente.getTelefone() != null) existente.setTelefone(cliente.getTelefone());
+    if (cliente.getCelular() != null) existente.setCelular(cliente.getCelular());
+
+    ClienteModel atualizado = fRepo.save(existente);
     return ResponseEntity.ok(atualizado);
 }
-
 }
+
