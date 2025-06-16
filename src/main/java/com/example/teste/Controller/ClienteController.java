@@ -66,7 +66,7 @@ public ResponseEntity<ClienteModel> atualizarCliente(@RequestBody ClienteModel c
 
     ClienteModel existente = existenteOpt.get();
 
-    // Apenas atualiza campos que vieram no JSON (evita sobrescrever com null)
+    // Campos já existentes
     if (cliente.getNome() != null) existente.setNome(cliente.getNome());
     if (cliente.getCpf() != null) existente.setCpf(cliente.getCpf());
     if (cliente.getRg() != null) existente.setRg(cliente.getRg());
@@ -77,8 +77,19 @@ public ResponseEntity<ClienteModel> atualizarCliente(@RequestBody ClienteModel c
     if (cliente.getTelefone() != null) existente.setTelefone(cliente.getTelefone());
     if (cliente.getCelular() != null) existente.setCelular(cliente.getCelular());
 
+    // Campos que estavam faltando
+    if (cliente.getNivelSuporte() != null) existente.setNivelSuporte(cliente.getNivelSuporte());
+    if (cliente.getComorbidade() != null) existente.setComorbidade(cliente.getComorbidade());
+    if (cliente.getCategoriaIniciada() != null) existente.setCategoriaIniciada(cliente.getCategoriaIniciada());
+    if (cliente.getCategoriaFinalizada() != null) existente.setCategoriaFinalizada(cliente.getCategoriaFinalizada());
+    if (cliente.getMeta() != null) existente.setMeta(cliente.getMeta());
+    if (cliente.getCorPrimaria() != null) existente.setCorPrimaria(cliente.getCorPrimaria());
+    if (cliente.getCorSecundaria() != null) existente.setCorSecundaria(cliente.getCorSecundaria());
+    if (cliente.getCorTerciaria() != null) existente.setCorTerciaria(cliente.getCorTerciaria());
+
     ClienteModel atualizado = fRepo.save(existente);
     return ResponseEntity.ok(atualizado);
 }
+
 }
 
