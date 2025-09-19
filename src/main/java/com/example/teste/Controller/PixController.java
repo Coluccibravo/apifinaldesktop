@@ -1,11 +1,8 @@
 package com.example.teste.Controller;
 
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import com.example.teste.Model.PixModel;
 
@@ -33,6 +30,29 @@ public class PixController {
         return pixRepository.findByClienteId(clienteId);
     }
 
+    @PutMapping("/atualizar/{id}")
+    public ResponseEntity<PixModel> atualizarPix(@PathVariable Long id, @RequestBody PixModel pix) {
+        // Procura o PixModel pelo ID
+        Optional<PixModel> existenteOpt = pixRepository.findById(id);
+
+        // Se o PixModel não for encontrado, retorna um 404 Not Found
+        if (existenteOpt.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        PixModel existente = existenteOpt.get();
+
+        // Atualiza os campos que foram fornecidos no request body
+        if (pix.getChave() != null) existente.setChave(pix.getChave());
+        if (pix.getTipo() != null) existente.setTipo(pix.getTipo());
+        if (pix.getCliente() != null) existente.setCliente(pix.getCliente());
+
+        // Salva o PixModel atualizado
+        PixModel atualizado = pixRepository.save(existente);
+
+        // Retorna o PixModel atualizado com o status 200 OK
+        return ResponseEntity.ok(atualizado);
+    }
 
 
 
