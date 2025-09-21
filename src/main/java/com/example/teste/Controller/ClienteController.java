@@ -53,7 +53,7 @@ public class ClienteController {
         return fRepo.findByCpf(cpf);
     }
 
-    @PatchMapping
+    @PatchMapping("/atualizar")
 public ResponseEntity<ClienteModel> atualizarCliente(@RequestBody ClienteModel cliente) {
     if (cliente.getId() == null) {
         return ResponseEntity.badRequest().build();

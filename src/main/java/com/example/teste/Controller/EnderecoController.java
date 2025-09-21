@@ -53,7 +53,7 @@ public class EnderecoController {
         return ResponseEntity.ok(enderecoOpt.get());
     }
 
-    @PutMapping
+    @PutMapping("/atualizar")
     public ResponseEntity<EnderecoModel> atualizarEndereco(@RequestBody EnderecoModel endereco) {
     if (endereco.getCliente() == null || endereco.getCliente().getId() == null) {
         return ResponseEntity.badRequest().build();

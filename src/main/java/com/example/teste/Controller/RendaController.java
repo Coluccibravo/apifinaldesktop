@@ -3,7 +3,11 @@ package com.example.teste.Controller;
 import java.util.List;
 import java.util.Optional;
 
+import com.example.teste.Model.ClienteModel;
+import com.example.teste.Repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +30,9 @@ public class RendaController {
 
     @Autowired
     private RendaInvestimentoRepository repository;
+
+    @Autowired
+    private ClienteRepository repositoryc;
 
 
     @GetMapping("/todos")
@@ -70,4 +77,56 @@ public ResponseEntity<RendaInvestimentoModel> atualizarRenda(@RequestBody RendaI
     RendaInvestimentoModel atualizado = repository.save(existente);
     return ResponseEntity.ok(atualizado);
 }
+
+    @PutMapping("/atualizar/{id}")
+    public ResponseEntity<RendaInvestimentoModel> atualizarRendaInvestimento(
+            @PathVariable Long id,
+            @RequestBody RendaInvestimentoModel rendaInvestimentoUpdated) {
+
+        // Buscar o RendaInvestimento pelo ID
+        Optional<RendaInvestimentoModel> existingRendaInvestimentoOpt = repository.findById(id);
+
+        if (!existingRendaInvestimentoOpt.isPresent()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null); // Retorna 404 se não encontrar o recurso
+        }
+
+        RendaInvestimentoModel existingRendaInvestimento = existingRendaInvestimentoOpt.get();
+
+        // Atualizando os campos do modelo
+        existingRendaInvestimento.setRendaMensal(rendaInvestimentoUpdated.getRendaMensal());
+        existingRendaInvestimento.setPessoasDependentes(rendaInvestimentoUpdated.getPessoasDependentes());
+        existingRendaInvestimento.setRendaTotalresidencial(rendaInvestimentoUpdated.getRendaTotalresidencial());
+        existingRendaInvestimento.setRendaTotalInvestimentos(rendaInvestimentoUpdated.getRendaTotalInvestimentos());
+        existingRendaInvestimento.setSaldo(rendaInvestimentoUpdated.getSaldo());
+        existingRendaInvestimento.setPerfildoinvestidor(rendaInvestimentoUpdated.getPerfildoinvestidor());
+        existingRendaInvestimento.setPersentualRendaInvestimentos(rendaInvestimentoUpdated.getPersentualRendaInvestimentos());
+        existingRendaInvestimento.setPlano(rendaInvestimentoUpdated.getPlano());
+        existingRendaInvestimento.setAgencia(rendaInvestimentoUpdated.getAgencia());
+        existingRendaInvestimento.setTipo(rendaInvestimentoUpdated.getTipo());
+        existingRendaInvestimento.setFundoimobiliario(rendaInvestimentoUpdated.getFundoimobiliario());
+        existingRendaInvestimento.setAcoes(rendaInvestimentoUpdated.getAcoes());
+        existingRendaInvestimento.setCriptomoedas(rendaInvestimentoUpdated.getCriptomoedas());
+        existingRendaInvestimento.setPoupanca(rendaInvestimentoUpdated.getPoupanca());
+
+        // Verifica se o cliente foi alterado
+        if (rendaInvestimentoUpdated.getCliente() != null &&
+                !rendaInvestimentoUpdated.getCliente().getId().equals(existingRendaInvestimento.getCliente().getId())) {
+
+            // Atualiza o cliente se o ID do cliente for alterado
+            Long clienteId = rendaInvestimentoUpdated.getCliente().getId();
+            Optional<ClienteModel> clienteOpt = repositoryc.findById(clienteId);
+
+            if (!clienteOpt.isPresent()) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null); // Cliente não encontrado
+            }
+
+            // Atualiza o cliente relacionado
+            existingRendaInvestimento.setCliente(clienteOpt.get());
+        }
+
+        // Salvando a entidade atualizada no banco de dados
+        RendaInvestimentoModel updatedRendaInvestimento = repository.save(existingRendaInvestimento);
+
+        return ResponseEntity.ok(updatedRendaInvestimento); // Retorna 200 com o objeto atualizado
+    }
 }
