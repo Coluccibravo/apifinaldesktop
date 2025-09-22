@@ -12,17 +12,9 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("*")
-                .allowedOrigins(
-                        "http://localhost:3000",
-                        "http://localhost:3001",
-                        "http://localhost:5173",
-                        "http://127.0.0.1:5500",
-                        "https://web-bankalt.vercel.app"
-                )
+                .allowedOrigins("*") // permite todas as origens
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH")
-                .allowedHeaders("*")
-                .allowCredentials(true);
+                .allowedHeaders("*");
     }
 
     // Configuração para servir arquivos estáticos (uploads)
